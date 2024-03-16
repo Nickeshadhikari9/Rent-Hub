@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Add a default marker</title>
+    <meta property="og:description" content="Add a default marker to the map." />
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='https://unpkg.com/maplibre-gl@4.1.0/dist/maplibre-gl.css' />
+    <script src='https://unpkg.com/maplibre-gl@4.1.0/dist/maplibre-gl.js'></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body,
+        #map {
+            height: 100%;
+        }
+
+        .coordinates {
+            background: rgba(0, 0, 0, 0.745);
+            color: #fff;
+            position: absolute;
+            bottom: 70px;
+            /* Adjusted bottom position */
+            left: 10px;
+            padding: 5px 10px;
+            margin: 0;
+            font-size: 13px;
+            line-height: 18px;
+            border-radius: 3px;
+            z-index: 1000;
+        }
+
+        #submitButton {
+            position: absolute;
+            top: 650px;
+            /* Adjust the top position as needed */
+
+            transform: translateX(550%);
+            z-index: 1000;
+            padding: 15px 40px;
+            background-color: #008052;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <pre id="coordinates" class="coordinates"></pre>
+    <form id="markerForm" style="position: absolute; top: 10px; left: 10px; z-index: 1000;" method="post"
+        action="/room/add-room/location">
+        <input type="hidden" id="lng" name="lng">
+        <input type="hidden" id="lat" name="lat">
+        <button type="submit" id="submitButton">Submit</button>
+    </form>
+    <script>
+        let marker;
+        let markerDragged = false; // Flag to track if the marker has been dragged
+        const lngInput = document.getElementById('lng');
+        const latInput = document.getElementById('lat');
+        const coordinates = document.getElementById('coordinates');
+        coordinates.innerHTML = `Drag the marker to select the Location`;
+        try {
+            navigator.geolocation.getCurrentPosition(position => {
+                const { latitude, longitude } = position.coords;
+                if (latitude && longitude) {
+                    initializeMap(latitude, longitude);
+                }
+                else {
+                    initializeMap(26.667365726873925, 87.70134362945771);
+                }
+            }, error => {
+                initializeMap(26.667365726873925, 87.70134362945771);
+            });
+        } catch (error) {
+            initializeMap(26.667365726873925, 87.70134362945771);
+        }
+
+        function initializeMap(latitude, longitude) {
+            const map = new maplibregl.Map({
+                container: 'map',
+                style:
+                    'https://api.maptiler.com/maps/streets/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL',
+                center: [longitude, latitude],
+                zoom: 10
+            });
+
+            marker = new maplibregl.Marker({ draggable: true })
+                .setLngLat([longitude, latitude])
+                .addTo(map);
+
+            function onDragEnd() {
+                markerDragged = true; // Set the flag to true when the marker is dragged
+                const lngLat = marker.getLngLat();
+                lngInput.value = lngLat.lng;
+                latInput.value = lngLat.lat;
+            }
+
+            marker.on('dragend', onDragEnd);
+            map.addControl(new maplibregl.NavigationControl());
+        }
+
+        document.getElementById('submitButton').addEventListener('click', function (event) {
+            if (!markerDragged) {
+                // If the marker has not been dragged, use default geolocation
+                event.preventDefault(); // Prevent form submission
+                navigator.geolocation.getCurrentPosition(position => {
+                    const { latitude, longitude } = position.coords;
+                    latInput.value = latitude;
+                    lngInput.value = longitude;
+                    document.getElementById('markerForm').submit(); // Submit the form
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

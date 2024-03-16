@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/newAdmin.css">
+    <link rel="stylesheet" href="css/adminDashboard.css">
+    <link rel="stylesheet" href="css/messagePopup.css">
+    <script src="https://kit.fontawesome.com/a209b08554.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/admin/logout">Logout</a>
+        <a href="/admin/dashboard">Rooms</a>
+        <a href="/admin/dashboard-users">Users</a>
+    </div>
+<!--Message Popup-->
+    <div class="container">
+        <h2>New Admin</h2>
+        <form action="/admin/new-admin" method="post">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <span>Not registered <a href="/user/register"  style="text-decoration:underline ;">Click Here</a></span><br><br>
+            <input type="submit" value="submit">
+        </form>
+    </div>
+    <script src="js/index.js"></script>
+</body>
+</html>
