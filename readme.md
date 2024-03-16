@@ -20,7 +20,7 @@ Rent Hub is a platform designed to streamline the process of finding and listing
 
 ## Team Members
 
-Rent Hub was developed by a team of dedicated individuals passionate about creating a seamless solution for room rentals. The team members involved in the project include developers, designers, and project managers, each contributing their expertise to bring Rent Hub to life.
+Rent Hub was developed by a team of dedicated individuals passionate about creating a seamless solution for room rentals. The team members involved in the project include a frontend developer, and a backend developer seach contributing their expertise to bring Rent Hub to life.
 
 - Nikesh Adhikari: Backend Developer
 
