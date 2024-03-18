@@ -11,9 +11,8 @@ app.use(express.static(path.resolve("../../public")));
 const addRoom = async (req, res) => {
     try {
         const { title, roomAddress, roomContactNum, price, description } = req.body;
-        const lng = req.body.lng
-        const lat = req.body.lat
-        console.log(lng, lat)
+        const lng = req.body.lng;
+        const lat = req.body.lat;
         if (
             [title, roomAddress, roomContactNum, price].some((field) => field?.trim() === "")
         ) {
@@ -51,7 +50,7 @@ const addRoom = async (req, res) => {
 };
 const receiveLocation = async (req, res) => {
     try {
-        const { lng, lat } = req.body
+        const { lng, lat } = req.body;
         if (lng && lat) {
             return res.redirect(`/room/add-room?lng=${lng}&lat=${lat}&message=Location Added`)
         }
