@@ -40,7 +40,7 @@ const logoutAdmin = async (req, res) => {
 
 const generateRoomDetailsHtml = function generateRoomDetailsHtml(rooms) {
     let roomDetailsHtml = '';
-    rooms.forEach(room => {
+    rooms.forEach((room,index) => {
         const approveButton = room.approved ?
             '<span class="approved">Approved</span>' :
             `<form action="/admin/approved" method="post">
@@ -63,6 +63,7 @@ const generateRoomDetailsHtml = function generateRoomDetailsHtml(rooms) {
      `;
         roomDetailsHtml += `
             <tr>
+                <td>${index + 1}</td>
                 <td><span class="room-lister">${rooms[0].roomLister[0].listerName}</span></td>
                 <td><span class="room-title">${room.title}</span></td>
                 <td><img class="room-image" src="/temp/${room.roomImage}" alt="Room Image"></td>
@@ -82,7 +83,7 @@ const generateRoomDetailsHtml = function generateRoomDetailsHtml(rooms) {
 }
 const generateUserDetailsHtml = function generateUserDetailsHtml(users, currentAdminId) {
     let userDetailsHtml = '';
-    users.forEach(user => {
+    users.forEach((user,index) => {
         let deleteButtonHtml=''
         let removeAdminButton=''
         if (!(currentAdminId == user._id)) {
@@ -105,6 +106,7 @@ const generateUserDetailsHtml = function generateUserDetailsHtml(users, currentA
         
         userDetailsHtml += `
             <tr>
+                <td>${index + 1}</td>
                 <td><span class="user-username">${user.fullName}</span></td>
                 <td><span class="user-email">${user.email}</span></td>
                 <td><span class="user-contact">${user.contactNum}</span></td>
