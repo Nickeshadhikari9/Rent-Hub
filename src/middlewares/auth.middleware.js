@@ -47,16 +47,39 @@ const addLogoutButton = (filePath) => {
         try {
             const htmlContent = fs.readFileSync(filePath, 'utf-8');
             const originalContent = '<a href="/user/login" id="loginBtn"class="_signup">LOGIN</a><a href="/user/register" id="registerBtn" class="register-btn">REGISTRATION</a>';
-            const logoutbtn = '<a href="/user/logout" id="logoutBtn"class="_logout">LOGOUT</a>';
-            const logoutButton = req.session.user ? logoutbtn : originalContent;
+            const logoutbtn = '<a href="/user/logout" id="logoutBtn" class="_logout">LOGOUT</a>';
+            let logoutButton = originalContent;
+            if (req.session.user) {
+                const userId = req.session.user;
+                const user = await User.findById(userId);
+
+                if (user) {
+                   const userName = user.fullName;
+                    logoutButton = `${logoutbtn}<span class="userName"><i class="fa-solid fa-user fa-sm" style="color: #ffffff;"></i>   ${userName}</span>`;
+                }
+            }
             const modifiedHtmlContent = htmlContent.replace(originalContent, logoutButton);
+            res.locals.modifiedHtmlContent = modifiedHtmlContent;
+            next();
+        } catch (error) {
+            console.error('Error rendering HTML file:', error);
+            res.status(500).send('Internal Server Error');
+        }
+    };
+};
+const addRoomtButton =async (req, res, next) => {
+        try {
+            const originalContent ="<!--addroom-->";
+            const addRoombtn = '<a href="/room/add-room"><li>ADD ROOM</li></a>';
+            const user=req.session.user;
+            const addRoomButton = user ? addRoombtn : originalContent;
+            const modifiedHtmlContent = res.locals.modifiedHtmlContent.replace(originalContent, addRoomButton);
             res.locals.modifiedHtmlContent = modifiedHtmlContent;
             next()
         } catch (error) {
             console.error('Error rendering HTML file:', error);
             res.status(500).send('Internal Server Error');
         }
-    }
 };
 
 const redirectLoggedInUser=async(req, res, next)=>{
@@ -72,6 +95,6 @@ const redirectLoggedInUser=async(req, res, next)=>{
     }
 };
 
-module.exports = { verifyUserSession, verifyAdminSession, clearCache, addLogoutButton, redirectLoggedInUser
+module.exports = { verifyUserSession, verifyAdminSession, clearCache, addLogoutButton, redirectLoggedInUser, addRoomtButton
 };
 

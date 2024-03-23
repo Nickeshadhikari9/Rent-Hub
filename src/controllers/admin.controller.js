@@ -147,15 +147,20 @@ const deleteRoom = async (req, res) => {
 }
 const deleteUser = async (req, res) => {
     try {
-        const userId = req.body.userid
-        const deleteRoom = await User.findByIdAndDelete(userId)
-        return res.redirect('/admin/dashboard-users')
-    }
-    catch (error) {
-        console.error('Error approving room:', error);
+        const userId = req.body.userid;
+        const rooms = await Room.find();
+        for (const room of rooms) {
+                if (userId == room.roomLister[0].listerId) {
+                    await Room.findByIdAndDelete(room._id);
+                }
+            }
+        await User.findByIdAndDelete(userId);
+        return res.redirect('/admin/dashboard-users');
+    } catch (error) {
+        console.error('Error deleting user:', error);
         return res.status(500).json({ error: 'Internal Server Error' });
     }
-}
+};
 const editRoom = async (req, res) => {
     try {
         const roomId = req.body.roomid

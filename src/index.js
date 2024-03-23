@@ -8,7 +8,7 @@ const userRoute = require('./routes/user.routes.js');
 const roomRoute = require('./routes/room.routes.js');
 const adminRoute = require('./routes/admin.routes.js');
 const { successLogoutMessagePopup } = require("../src/middlewares/user.middleware.js");
-const { addLogoutButton } = require('./middlewares/auth.middleware.js');
+const { addLogoutButton, addRoomtButton } = require('./middlewares/auth.middleware.js');
 const app = require('./app.js');
 const PORT = process.env.PORT;
 
@@ -35,19 +35,15 @@ const adminSession = session({
   }
 });
 
-app.get("/",userSession, addLogoutButton(`${publicPath}/index.html`), async (req, res) => {
+app.get("/",userSession, addLogoutButton(`${publicPath}/index.html`),addRoomtButton, async (req, res) => {
   res.send(res.locals.modifiedHtmlContent);
 });
 
-app.get("/home",userSession, addLogoutButton(`${publicPath}/index.html`),successLogoutMessagePopup, async (req, res) => {
+app.get("/home",userSession, addLogoutButton(`${publicPath}/index.html`),addRoomtButton,successLogoutMessagePopup, async (req, res) => {
   res.send(res.locals.modifiedHtmlContent);
 });
 
-app.get("/contact",userSession, addLogoutButton(`${publicPath}/contact.html`), async (req, res) => {
-  res.send(res.locals.modifiedHtmlContent);
-});
-
-app.get("/service",userSession, addLogoutButton(`${publicPath}/service.html`), async (req, res) => {
+app.get("/service",userSession, addLogoutButton(`${publicPath}/service.html`),addRoomtButton, async (req, res) => {
   res.send(res.locals.modifiedHtmlContent);
 });
 

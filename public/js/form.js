@@ -13,6 +13,8 @@ document.getElementById("registrationForm").addEventListener("submit", function 
         isValid = false;
     } else if (!validateContactNum("contactNum", "contactNumError", "Contact Number should be of 10 digits")) {
         isValid = false;
+    } else if(!validateContactNum2("contactNum", "contactNumError", "Contact Number should only contain digits")) {
+        isValid = false;
     }
     if (!validateField("address", "addressError", "Please enter your address")) {
         isValid = false;
@@ -76,6 +78,25 @@ function validateContactNum(fieldId, errorId, errorMessage) {
     return true;
 }
 
+function validateContactNum2(fieldId, errorId, errorMessage) {
+    var field = document.getElementById(fieldId);
+    var error = document.getElementById(errorId);
+    var fieldValue = field.value.trim();
+
+    if (!/^\d+$/.test(fieldValue)) {
+        if (!errorDisplayed) {
+            error.innerHTML = errorMessage;
+            field.focus();
+            errorDisplayed = true;
+        }
+        return false;
+    } else {
+        error.innerHTML = "";
+    }
+    return true;
+}
+
+
 function validateField(fieldId, errorId, errorMessage) {
     var field = document.getElementById(fieldId);
     var error = document.getElementById(errorId);
@@ -124,8 +145,8 @@ function validateEmailField(fieldId, errorId) {
 }
 
 function isValidPassword(password) {
-    var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
-    return passwordRegex.test(password);
+    var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$,.@!^#]).{6,}$/;
+    return passwordRegex.test(password);    
 }
 
 function validatePasswordField(fieldId, errorId) {
@@ -142,7 +163,7 @@ function validatePasswordField(fieldId, errorId) {
         return false;
     } else if (!isValidPassword(password)) {
         if (!errorDisplayed) {
-            error.innerHTML = "Password must contain at least one uppercase letter, one lowercase letter, one digit, and be at least 8 characters long";
+            error.innerHTML = "Password must contain at least one uppercase letter, one lowercase letter, one digit,one special character and be at least 6 characters long";
             field.focus();
             errorDisplayed = true;
         }

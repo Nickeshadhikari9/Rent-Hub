@@ -46,7 +46,7 @@ const successMessagePopup = async (req, res, next) => {
             messagePopupContent = `
                 <div id="successPopupContainer">
                     <div class="popup">
-                        <p class="messageSuccess"><i class="fa-solid fa-circle-check fa-sm" style="color: #fcfcfc;"></i>  ${user.fullName}, ${success}.</p>
+                        <p class="messageSuccess"><i class="fa-solid fa-circle-check fa-sm" style="color: #fcfcfc;"></i> ${success}.</p>
                     </div>
                 </div>
                 `;

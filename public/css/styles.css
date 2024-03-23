@@ -142,6 +142,13 @@ header nav ul a{
     cursor: pointer;  
     
 }
+/*
+navbar loggedin-user*/
+.userName{
+    color: white;
+    font-size: 20px;
+    padding-left: 20px;
+}
 /* 
     ._signup{
     margin-top: 0.51rem;
@@ -267,5 +274,5 @@ header nav ul a{
   }
 /*form validation*/
 .error {
-    color: red;
+    color: rgb(255, 8, 0);
   }

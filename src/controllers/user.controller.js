@@ -95,7 +95,7 @@ const forget_password= async(req,res)=>{
             return res.redirect('/user/forget-password?message=E-mail with Reset Password link has been sent');
         }
         else{
-            return res.redirect('/user/forget-password/:user_id?error=User Not Registered');
+            return res.redirect('/user/forget-password?error=User Not Registered');
         }
 
     }

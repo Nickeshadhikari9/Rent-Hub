@@ -4,6 +4,7 @@ const roomSchema = new Schema(
     {
         title: {
             type: String,
+            required:true,
         },
         roomAddress: {
             type: String,
@@ -14,7 +15,7 @@ const roomSchema = new Schema(
             required: true
         },
         price: {
-            type: String,
+            type: Number,
             required: true
         },
         description: {
