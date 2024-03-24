@@ -3,13 +3,13 @@ const fs = require('fs');
 
 const verifyUserSession = async (req, res, next) => {
     try {
-        if (!req.session || !req.session.user) {
+            if (!req.session || !req.session.user) {
             return res.redirect("/user/login")
         }
         const userId = req.session.user;
         const user = await User.findById(userId);
         if (!user) {
-            return res.redirect('/login');
+            return res.redirect('/home');
         }
         req.user = user;
         next();
@@ -47,7 +47,6 @@ const addLogoutButton = (filePath) => {
         try {
             const htmlContent = fs.readFileSync(filePath, 'utf-8');
             const originalContent = '<a href="/user/login" id="loginBtn"class="_signup">LOGIN</a><a href="/user/register" id="registerBtn" class="register-btn">REGISTRATION</a>';
-            const logoutbtn = '<a href="/user/logout" id="logoutBtn" class="_logout">LOGOUT</a>';
             let logoutButton = originalContent;
             if (req.session.user) {
                 const userId = req.session.user;
@@ -55,7 +54,20 @@ const addLogoutButton = (filePath) => {
 
                 if (user) {
                    const userName = user.fullName;
-                    logoutButton = `${logoutbtn}<span class="userName"><i class="fa-solid fa-user fa-sm" style="color: #ffffff;"></i>   ${userName}</span>`;
+                    logoutButton = `<div class="user-dropdown" onclick="toggleDropdown()">
+                    <span class="username">
+                        <i class="fa-solid fa-user fa-sm" style="color: #ffffff;"></i>
+                        ${userName}  
+                        <i id="dropdownIcon" class="fa-solid fa-chevron-down fa-sm" style="color: #fafafa;"></i>
+                    </span>
+                    <div class="dropdown-content" id="dropdownContent">
+                    <a href="/room/my-listings/${userId}">My Listings  <i class="fa-solid fa-door-open fa-sm" style="color: #066a6a;"></i></a>
+                        <a href="/user/reset-loggedin-password/${userId}">Reset Password  <i class="fa-solid fa-key fa-sm" style="color: #066a6a;"></i></a>
+                        <a href="/user/logout">Logout    <i class="fa-solid fa-arrow-right-from-bracket fa-sm" style="color: #066a6a;"></i></a>
+                    </div>
+                </div>
+                
+                `;
                 }
             }
             const modifiedHtmlContent = htmlContent.replace(originalContent, logoutButton);

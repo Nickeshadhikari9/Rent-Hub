@@ -116,5 +116,4 @@ const resetPassword= async(req,res)=>{
         return res.json({error:"user not found!"})
     }
 }
-
 module.exports = {loginUser,registerUser,logoutUser, forget_password, resetPassword};

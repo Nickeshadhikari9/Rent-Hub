@@ -26,7 +26,7 @@ function hidePopupContainer() {
     if (popupContainer) {
         setTimeout(function() {
             popupContainer.style.display = 'none';
-        }, 5000);
+        }, 3000);
     }
 }
 //timeout for message success popup
@@ -36,7 +36,7 @@ function hidePopupContainer(popupId) {
   if (popupContainer) {
       setTimeout(function() {
           popupContainer.style.display = 'none';
-      }, 5000);
+      }, 3000);
   }
 }
 
@@ -51,5 +51,33 @@ document.querySelector('.room-image').addEventListener('click', function() {
 
 
 
-/*validate contact num*/
+/*drop down js*/
+function toggleDropdown() {
+  var dropdownContent = document.getElementById("dropdownContent");
+  var dropdownIcon = document.getElementById("dropdownIcon");
+
+  if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+      dropdownIcon.className = "fa-solid fa-chevron-down fa-sm";
+      dropdownIcon.style.color = "#fafafa";
+  } else {
+      dropdownContent.style.display = "block";
+      dropdownIcon.className = "fa-solid fa-chevron-up fa-sm";
+      dropdownIcon.style.color = "#ffffff";
+  }
+}
+
+document.addEventListener('click', function(event) {
+  var dropdownContent = document.getElementById("dropdownContent");
+  var userDropdown = document.querySelector('.user-dropdown');
+
+  if (!dropdownContent.contains(event.target) && !userDropdown.contains(event.target)) {
+      dropdownContent.style.display = "none";
+      var dropdownIcon = document.getElementById("dropdownIcon");
+      dropdownIcon.className = "fa-solid fa-chevron-down fa-sm";
+      dropdownIcon.style.color = "#fafafa";
+  }
+});
+
+
   

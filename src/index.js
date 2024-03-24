@@ -14,6 +14,9 @@ const PORT = process.env.PORT;
 
 const publicPath = path.join(__dirname, '../public');
 app.use(express.static(path.resolve("../public")));
+app.use('/css', express.static(path.join(__dirname, '../public/css'), { type: 'text/css' }));
+app.use('/js', express.static(path.join(__dirname, '../public/js'), { type: 'text/javascript' }));
+
 
 const userSession = session({
   secret: process.env.USERSECRET,

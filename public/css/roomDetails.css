@@ -82,8 +82,9 @@
     height: 650px;
     width: 90%;
     border-radius: 10px;
-    position: sticky;
-    top: 0; /* Stick it to the top */
+    position:unset;
+    z-index: 2;
+   
 }
 .contact-lister {
     text-align: center;
