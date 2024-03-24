@@ -1,7 +1,7 @@
 const fs = require('fs')
 const Room = require("../models/room.model.js")
 const User = require("../models/user.model.js")
-const {generateRoomDetailsHtml, generateUserDetailsHtml}  = require("../controllers/admin.controller");
+const {generateRoomDetailsHtml, generateUserDetailsHtml, editingRoomDetailsAdmin}  = require("../controllers/admin.controller");
 
 const displayUsersDetails = (filePath) => {
     return async (req, res, next) => {
@@ -45,5 +45,16 @@ const redirectLoggedInAdmin=async(req, res, next)=>{
         return res.json({error:'Internal server error'});
     }
 };
-
-module.exports={displayUsersDetails,displayRoomsDetails,redirectLoggedInAdmin};
+const displayMyRoomDetailsForm =  async (req, res, next) => {
+    try {
+        const roomId = req.query.roomid;
+        const room = await Room.findById(roomId);
+        const modifiedHtmlContent = res.locals.modifiedHtmlContent.replace('<!-- ROOM_DETAILS_PLACEHOLDER -->', editingRoomDetailsAdmin(room));
+        res.locals.modifiedHtmlContent = modifiedHtmlContent
+        next()
+    } catch (error) {
+        console.error('Error rendering room details page:', error);
+        res.send('Internal Server Error');
+    }
+};
+module.exports={displayUsersDetails,displayRoomsDetails,redirectLoggedInAdmin,displayMyRoomDetailsForm};

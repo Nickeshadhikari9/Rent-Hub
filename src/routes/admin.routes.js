@@ -3,7 +3,7 @@ const path = require("path");
 const router = express.Router();
 
 const { loginAdmin, logoutAdmin, approveAdmin, deleteRoom, editRoom, addAdmin, deleteUser, removeAdmin } = require("../controllers/admin.controller.js");
-const { displayUsersDetails,displayRoomsDetails, redirectLoggedInAdmin } = require("../middlewares/admin.middleware.js");
+const { displayUsersDetails,displayRoomsDetails, redirectLoggedInAdmin,displayMyRoomDetailsForm } = require("../middlewares/admin.middleware.js");
 const { messagePopup,successMessagePopup, successLogoutMessagePopup} = require("../middlewares/user.middleware.js");
 const { verifyAdminSession, clearCache } = require("../middlewares/auth.middleware.js");
 const app = require('../app.js');
@@ -22,6 +22,9 @@ router.get('/dashboard', verifyAdminSession, clearCache, displayRoomsDetails(`${
     return res.send(res.locals.modifiedHtmlContent);
 });
 router.get('/dashboard-users', verifyAdminSession, clearCache, displayUsersDetails(`${publicPath}/adminDashboard_users.html`), async (req, res) => {
+    return res.send(res.locals.modifiedHtmlContent);
+});
+router.get('/edit-room', verifyAdminSession, clearCache, messagePopup(`${publicPath}/adminEditForm.html`),displayMyRoomDetailsForm, async (req, res) => {
     return res.send(res.locals.modifiedHtmlContent);
 });
 

@@ -47,17 +47,9 @@ const generateRoomDetailsHtml = function generateRoomDetailsHtml(rooms) {
              <input type="hidden" name="roomid" value="${room._id}">
              <input class="approved-room-btn" type="submit" value="Approve">
          </form>`;
-        const editForm = `
-         <form id="edit-form" action="/admin/edit-room" method="post">
+        const editBtn = `
+         <form id="edit-room" action="/admin/edit-room?roomid=${room._id}" method="get">
              <input type="hidden" name="roomid" value="${room._id}">
-             <label for="title">Title:</label><br>
-             <input class="edit-room-title" type="text" id="title" name="title" value="${room.title}"><br>
-             <label for="price">Price:</label><br>
-             <input class="edit-room-price" type="text" id="price" name="price" value="${room.price}"><br>
-             <label for="roomAddress">Room Address:</label><br>
-             <input class="edit-room-address" type="text" id="roomAddress" name="roomAddress" value="${room.roomAddress}"><br>
-             <label for="description">Description:</label><br>
-             <textarea class="edit-room-description" id="description" name="description">${room.description}</textarea><br>
              <input class="edit-room-btn" type="submit" value="Edit">
          </form>
      `;
@@ -71,7 +63,7 @@ const generateRoomDetailsHtml = function generateRoomDetailsHtml(rooms) {
                 <td><span class="room-address">${room.roomAddress}</span></td>
                 <td><span class="room-description">${room.description}</span></td>
                 <td>${approveButton}</td>
-                <td>${editForm}</td>
+                <td>${editBtn}</td>
                 <td><form id="delete-room" action="/admin/delete-room" method="post">
                 <input type="hidden" name="roomid" value="${room._id}">
                 <input class="delete-room-btn" type="submit" value="Delete">
@@ -118,6 +110,24 @@ const generateUserDetailsHtml = function generateUserDetailsHtml(users, currentA
         `;
     });
     return userDetailsHtml;
+}
+const editingRoomDetailsAdmin = function editingRoomDetailsAdmin(room) {
+    let roomDetailsHtml = '';
+    roomDetailsHtml += `
+    <center><form id="edit-form" action="/admin/edit-room" method="post">
+    <input type="hidden" name="roomid" value="${room._id}">
+    <label for="title">Title:</label><br>
+    <input class="edit-room-title" type="text" id="title" name="title" value="${room.title}"><br>
+    <label for="roomAddress">Room Address:</label><br>
+    <input class="edit-room-address" type="text" id="roomAddress" name="roomAddress" value="${room.roomAddress}"><br>
+    <label for="price">Price:</label><br>
+    <input class="edit-room-price" type="text" id="price" name="price" value="${room.price}"><br>
+    <label for="description">Description:</label><br>
+    <textarea class="edit-room-description" id="description" name="description">${room.description}</textarea><br>
+    <input class="edit-room-btn" type="submit" value="Edit">
+</form></center>
+`;
+    return roomDetailsHtml;
 }
 const approveAdmin = async (req, res) => {
     try {
@@ -228,5 +238,5 @@ const removeAdmin= async(req,res)=>{
 }
 
 module.exports = {
-    loginAdmin, logoutAdmin, approveAdmin, generateRoomDetailsHtml, deleteRoom, editRoom, addAdmin, generateUserDetailsHtml, deleteUser, removeAdmin
+    loginAdmin, logoutAdmin, approveAdmin, generateRoomDetailsHtml, deleteRoom, editRoom, addAdmin, generateUserDetailsHtml, deleteUser, removeAdmin,editingRoomDetailsAdmin
 }
