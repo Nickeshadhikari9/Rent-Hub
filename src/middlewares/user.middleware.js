@@ -28,18 +28,34 @@ const messagePopup = (filePath) => {
         }
     };
 };
+const passwordPopup = async (req, res, next) => {
+        try {
+            const originalContent = '<!--Message Popup-->';
+            let messagePopupContent = '';
+            const error = req.query.error;
+            if (error) {
+                messagePopupContent = `
+                <div id="popupContainer" style:"display:block;">
+                    <div class="popup">
+                        <p class="messageError"><i class="fa-solid fa-triangle-exclamation fa-sm" style="color: #ffffff;"></i>  ${error}.</p>
+                    </div>
+                </div>
+                `;
+            }
+            else {
+                messagePopupContent = originalContent
+            }
+            const modifiedHtmlContent = res.locals.modifiedHtmlContent.replace(originalContent, messagePopupContent);
+            res.locals.modifiedHtmlContent = modifiedHtmlContent;
+            next();
+        } catch (error) {
+            res.status(500).send('Internal Server Error');
+        }
+    };
 
 const successMessagePopup = async (req, res, next) => {
     try {
         const originalContent = '<!--Message Popup-->';
-        let user
-        if (req.session.user) {
-            user = await User.findById(req.session.user)
-        }
-        if (req.session.admin) {
-
-            user = await User.findById(req.session.admin)
-        }
         let messagePopupContent = '';
         const success = req.query.success;
         if (success) {
@@ -109,4 +125,4 @@ const receiveUserId = async (req, res, next) => {
     }
 }
 
-module.exports = { messagePopup, successMessagePopup, successLogoutMessagePopup, receiveUserId }
+module.exports = { messagePopup, successMessagePopup, successLogoutMessagePopup, receiveUserId,passwordPopup }

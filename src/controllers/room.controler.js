@@ -62,7 +62,9 @@ const editRoomDetails = async (req, res) => {
         let roomImageFilePath;
         if (req.file && req.file.filename) {
             roomImageFilePath = req.file.filename;
-        } if ((room.title == title) && (room.roomAddress == roomAddress) && (room.roomContactNum == roomContactNum) && (room.price == price) && (room.description == description) && (roomImageFilePath == previousImage)) {
+            
+        }
+         if ((room.title == title) && (room.roomAddress == roomAddress) && (room.roomContactNum == roomContactNum) && (room.price == price) && (room.description == description) && (roomImageFilePath == undefined)) {
             return res.redirect(`/room/my-listings/${userId}?message=No changes detected in Room Details`);
         } else {
             const roomCreated = await Room.findByIdAndUpdate(roomid, {

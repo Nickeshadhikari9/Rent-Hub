@@ -26,7 +26,7 @@ function hidePopupContainer() {
     if (popupContainer) {
         setTimeout(function() {
             popupContainer.style.display = 'none';
-        }, 3000);
+        }, 5000);
     }
 }
 //timeout for message success popup
@@ -36,7 +36,7 @@ function hidePopupContainer(popupId) {
   if (popupContainer) {
       setTimeout(function() {
           popupContainer.style.display = 'none';
-      }, 3000);
+      }, 5000);
   }
 }
 

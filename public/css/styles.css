@@ -258,9 +258,3 @@ header nav ul a{
 .dropdown-content a:hover {
     background-color: #a6a6a6;
 }
-/*My listings*/
-.myListings{
-    font-size:30px;
-    font-weight:bolder;
-    color: #3b4247;
-}
