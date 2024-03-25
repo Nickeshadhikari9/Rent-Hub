@@ -21,12 +21,23 @@
 #edit-form input[type="text"],
 #edit-form input[type="email"],
 #edit-form input[type="password"],
-#edit-form textarea,
 #edit-form select {
     width: 20rem;
     padding: 10px;
+    margin-bottom: 0.9rem; 
+    border-radius: 5px;
+    box-sizing: border-box;
+    border: 2px solid #008052;
+    font-size: 20px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+#edit-form textarea {
+    width: 20rem;
     margin-bottom: 0.9rem;
-    border: 1px solid #ccc;
+    max-width: 20rem;
+    min-width: 20rem;
+    min-height: 110px;
+    padding: 10px;
     border-radius: 5px;
     box-sizing: border-box;
     border: 2px solid #008052;
@@ -80,6 +91,5 @@ input[type="file"] {
 .custom-file-input-btn:hover {
     background-color: var(--hover-color);
 }
-
 
 

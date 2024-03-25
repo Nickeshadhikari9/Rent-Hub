@@ -63,10 +63,21 @@ input[type="file"] {
     width: 20rem;
     padding: 10px;
     margin-bottom: 0.9rem;
-    border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
     border: 2px solid #008052;
+}
+textarea{
+    width: 20rem;
+    margin-bottom: 0.9rem;
+    max-width: 20rem;
+    min-width: 20rem;
+    min-height: 110px;
+    padding: 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    border: 2px solid #008052;
+    font-size: 20px;
 }
 /* Style the file input */
 input[type="file"] {

@@ -260,15 +260,24 @@ const sendEnquiryEmail = async (listerEmail, listerName, userName, userEmail, us
             from: process.env.APP_EMAIL,
             to: listerEmail,
             subject: "Room Enquiry by User",
-            html: `<span style="font-size:20px;">Hello, ${listerName}</span><br><span style="font-size:16px;">Mr. ${userName} is intrested in the Room Listed by you.</span>
-            <span style="font-size:16px;">Here's What is he Enquiring about:<br>"${enquiry}"<br>Here's the user E-mail: ${userEmail}<br>Contact Number:${userContact}</span>`
+            html: `<p style="font-size: 18px; font-family: Arial, sans-serif; line-height: 1.5;">
+            <strong>Hello, ${listerName},</strong>
+            <br><br>
+            We wanted to inform you that Mr. ${userName} has shown interest in the room listed by you.
+        </p>
+        <p style="font-size: 16px; font-family: Arial, sans-serif; line-height: 1.5;">
+            Here's what he is enquiring about:<br>
+            <em>"${enquiry}"</em><br><br>
+            User's Email: ${userEmail}<br>
+            Contact Number: ${userContact}
+        </p>
+        `
         }
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
                 console.log(error)
             }
             else {
-                console.log("mail sent")
                 return res.redirect(`/room/available-rooms/details?roomid=${roomid}&message=E-mail has been sent with your enquiry`);
             }
         })

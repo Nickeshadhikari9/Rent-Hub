@@ -38,11 +38,11 @@ SVG{
 ._gmail{
     color: rgb(182, 185, 181);
     padding: 0rem;
-   margin-left: 47rem;
+   margin-left: 43rem;
 }
 ._rent11{
     vertical-align: .31rem;
-    padding-left: .2rem;
+    padding-left: .4rem;
 }
 ._phonenum{
     color: rgb(182, 185, 181);
@@ -257,4 +257,22 @@ header nav ul a{
 
 .dropdown-content a:hover {
     background-color: #a6a6a6;
+}
+/*Back button*/
+#back-btn {
+    background-color: #008080;
+    color: white;
+    padding: 20px 40px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: fixed;
+    z-index: 100;
+    top: 150px;
+    left: 40px;
+}
+
+.back-btn:hover {
+    background-color: #36454F;
 }

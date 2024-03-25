@@ -124,5 +124,14 @@ const receiveUserId = async (req, res, next) => {
 
     }
 }
+const emailExpiryChecker= async(req, res,next)=>{
+    const timestamp=req.query.timestamp;
+    const expirationTime= 5 * 60 * 1000;
+    const currentTime=Date.now();
+    if(currentTime - parseInt(timestamp) > expirationTime){
+        return res.redirect(`/user/login?error=The reset link has expired. Please click "Forget Password" to receive a new email with a reset link.`);
+    }
+    next()
+}
 
-module.exports = { messagePopup, successMessagePopup, successLogoutMessagePopup, receiveUserId,passwordPopup }
+module.exports = { messagePopup, successMessagePopup, successLogoutMessagePopup, receiveUserId,passwordPopup, emailExpiryChecker }

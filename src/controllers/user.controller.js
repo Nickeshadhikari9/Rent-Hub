@@ -55,6 +55,7 @@ const logoutUser = async (req, res) => {
 
 const sendResetEmail = async (email, name, user_id) => {
     try {
+        const timestamp = Date.now();
         const transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
             port: process.env.APP_PORT,
@@ -69,8 +70,15 @@ const sendResetEmail = async (email, name, user_id) => {
             from: process.env.APP_EMAIL,
             to: email,
             subject: "Reset Password Email",
-            html: `<span style="font-size:20px">Hello, ${name}<br>Please click below to Reset Your Password &#9660;</span><br>
-            <a href="${process.env.WEBSITE_URL}/${user_id}" style="font-size:20px;">Reset Password</a>`
+            html: `<p style="font-size: 16px; font-family: Arial, sans-serif;">
+            Hello, ${name},<br><br>
+            Please click the button below to reset your password:
+        </p>
+        <a href="${process.env.WEBSITE_URL}/${user_id}?timestamp=${timestamp}" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #ffffff; text-decoration: none; font-size: 16px; font-family: Arial, sans-serif;">Reset Password</a>
+        <p style="font-size: 16px; font-family: Arial, sans-serif;">
+            This link will expire in 5 minutes after receiving this email.
+        </p>
+        `
         }
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
