@@ -244,7 +244,7 @@ const deleteRoom = async (req, res) => {
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 }
-const sendEnquiryEmail = async (listerEmail, listerName, userName, userEmail, userContact, enquiry, roomid) => {
+const sendEnquiryEmail = async (listerEmail, listerName, userName, userEmail, userContact, enquiry, roomid,roomTitle) => {
     try {
         const transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
@@ -263,7 +263,7 @@ const sendEnquiryEmail = async (listerEmail, listerName, userName, userEmail, us
             html: `<p style="font-size: 18px; font-family: Arial, sans-serif; line-height: 1.5;">
             <strong>Hello, ${listerName},</strong>
             <br><br>
-            We wanted to inform you that Mr. ${userName} has shown interest in the room listed by you.
+            We wanted to inform you that Mr. ${userName} has shown interest in the room listed by you. Entitled: <b>${roomTitle}</b>.
         </p>
         <p style="font-size: 16px; font-family: Arial, sans-serif; line-height: 1.5;">
             Here's what he is enquiring about:<br>
@@ -298,7 +298,8 @@ const sendEmail = async (req, res) => {
             const userContact = user.contactNum
             const listerEmail = room.roomLister[0].listerEmail
             const listerName = room.roomLister[0].listerName
-            sendEnquiryEmail(listerEmail, listerName, userName, userEmail, userContact, enquiry, roomid)
+            const roomTitle = room.title
+            sendEnquiryEmail(listerEmail, listerName, userName, userEmail, userContact, enquiry, roomid, roomTitle)
             return res.redirect(`/room/available-rooms/details?roomid=${roomid}&message=E-mail has been sent with your enquiry`);
         }
         else {
