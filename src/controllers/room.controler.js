@@ -102,7 +102,7 @@ const generateRoomDetailsHtml = function generateRoomDetailsHtml(rooms, islogged
         rooms.forEach(room => {
             roomDetailsHtml += `
         <div class="room">
-                <img class="room-image" src="/temp/${room.roomImage}" alt="Room Image">
+                <img class="room-image" src="${room.roomImage}" alt="Room Image">
                 <h3 class="room-title">${room.title}</h3>
             <div class="room-info">
                 <span class="heading">Price:</span>
@@ -155,7 +155,7 @@ const allRoomDetails = function allRoomDetails(room, user, roomListerIsUser) {
 <div class="room">
   <div class="room-content">
     <div class="room-image">
-        <img class="room-image-details" src="/temp/${room.roomImage}" alt="Room Image">
+        <img class="room-image-details" src="${room.roomImage}" alt="Room Image">
     </div>
     <div class="room-details">
         <h3 class="room-title">${room.title}</h3>

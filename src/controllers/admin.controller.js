@@ -58,7 +58,7 @@ const generateRoomDetailsHtml = function generateRoomDetailsHtml(rooms) {
                 <td>${index + 1}</td>
                 <td><span class="room-lister">${rooms[index].roomLister[0].listerName}</span></td>
                 <td><span class="room-title">${room.title}</span></td>
-                <td><img class="room-image" src="/temp/${room.roomImage}" alt="Room Image"></td>
+                <td><img class="room-image" src="${room.roomImage}" alt="Room Image"></td>
                 <td><span class="room-price">Rs ${room.price}</span></td>
                 <td><span class="room-address">${room.roomAddress}</span></td>
                 <td><span class="room-description">${room.description}</span></td>
