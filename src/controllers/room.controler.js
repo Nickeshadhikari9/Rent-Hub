@@ -216,7 +216,7 @@ const editingRoomDetails = function editingRoomDetails(roomId, room, userId) {
         <label for="description">Contact Number:</label><br>
         <input class="edit-room-price" type="text" id="contact" name="roomContactNum" value="${room.roomContactNum}"><br>
         <label for="roomAddress">Price:</label><br>
-        <input class="edit-room-price" type="text" id="price" name="price" value="${room.price}"><br>
+        <input class="edit-room-price" type="text" id="price" name="price" value="${room.price}" min="0"><br>
         <label for="roomAddress">Description:</label><br>
         <textarea class="edit-room-description" id="description" name="description">${room.description}</textarea><br>
         <input type="hidden" name="previousImage" value="${room.roomImage}">

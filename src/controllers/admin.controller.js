@@ -121,7 +121,7 @@ const editingRoomDetailsAdmin = function editingRoomDetailsAdmin(room) {
     <label for="roomAddress">Room Address:</label><br>
     <input class="edit-room-address" type="text" id="roomAddress" name="roomAddress" value="${room.roomAddress}"><br>
     <label for="price">Price:</label><br>
-    <input class="edit-room-price" type="text" id="price" name="price" value="${room.price}"><br>
+    <input class="edit-room-price" type="text" id="price" name="price" value="${room.price}" min="0"><br>
     <label for="description">Description:</label><br>
     <textarea class="edit-room-description" id="description" name="description">${room.description}</textarea><br>
     <input class="edit-room-btn" type="submit" value="Edit">
