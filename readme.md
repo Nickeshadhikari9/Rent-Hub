@@ -2,6 +2,9 @@
 
 Rent Hub is a platform designed to streamline the process of finding and listing rooms for rent. Whether you're a landlord looking to rent out a room or a tenant searching for accommodation, Rent Hub makes it easy to connect and find the perfect match.
 
+Preview of Rent Hub-[https://rent-hub-1.onrender.com](https://rent-hub-1.onrender.com)
+Note: Preview is only available if after the the server is restarted. So for preview contact to the developers.
+
 ## Features
 
 - **Room Listings**: Landlords can easily list their rooms for rent, providing details such as location, amenities, and rental terms.
