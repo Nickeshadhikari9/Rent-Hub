@@ -27,14 +27,14 @@ Rent Hub was developed by a team of dedicated individuals passionate about creat
 
 - Nikesh Adhikari: Backend Developer
 
-[![portfolio](https://img.shields.io/badge/facebook-000?style=for-the-badge&logo=facebook&logoColor=white)](profile.php?id=100022588837150)
+[![portfolio](https://img.shields.io/badge/facebook-000?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/profile.php?id=100022588837150)
 
 [![linkedin](https://img.shields.io/badge/github-0A66C2?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Nickeshadhikari9)
 ##  
 
 - Prayash Bhattarai: Frontend Developer
 
-[![portfolio](https://img.shields.io/badge/facebook-000?style=for-the-badge&logo=facebook&logoColor=white)]()
+[![portfolio](https://img.shields.io/badge/facebook-000?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/prayas.bhattarai.12)
 
 [![linkedin](https://img.shields.io/badge/github-0A66C2?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Prayash-11)
 ##  
